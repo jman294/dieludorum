@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Die Ludorum</title>
+    <meta name="author" content="name">
+    <meta name="description" content="description here">
+    <meta name="keywords" content="keywords,here">
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <div id="header-block" class="block">
+        <h1>            Diē             <br>                Ludōrum        </h1>
+      </div>
+      <div id="title-block" class="block">
+        <h2>            Lost In Translationn            </h2>
+      </div>
+      <div id="page-content">
+        <p>Enter some funny english text here: </p>
+        <input type="text" id="input-field">
+        <button id="go-button">Go!</button>
+        <p>Latin Translation: </p>
+        <input type="text" class="translation" disabled>
+        <p>English Translation of the last Latin: </p>
+        <input type="text" class="translation"  disabled>
+        <p>Back to Latin: </p>
+        <input type="text" class="translation" disabled>
+        <p>Finally, English: </p>
+        <input type="text" class="translation" disabled>
+      </div>
+      <div id="m1" class="block small-block"><a href="#">Roman Numerals</a></div>
+      <div id="m2" class="block small-block"><a href="#">Roman Numerals</a></div>
+      <footer>Created by <a href="https://github.com/jman294">jman294</a>.<b>:wq</b> </footer>
+    </div>
+  </body>
+  <script>
+    var button = document.getElementById("go-button")
+var input = document.getElementById("input-field")
+var translations = document.getElementsByClassName("translation")
+button.addEventListener("click", function (e) {
+  var english = input.value
+  if (english === '') {
+    button.textContent = 'Please enter something!'
+  } else {
+    var urlLa = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=la&text='
+    var urlEn = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=en&text='
+    axios.get(urlLa + english)
+      .then(function (data) {
+        translations[0].value = data.data.translation
+        setTimeout(function () {
+          axios.get(urlEn + data.data.translation)
+            .then(function (data) {
+              translations[1].value = data.data.translation
+              setTimeout(function () {
+                axios.get(urlLa + data.data.translation)
+                  .then(function (data) {
+                    translations[2].value = data.data.translation
+                    setTimeout(function () {
+                      axios.get(urlEn + data.data.translation)
+                        .then(function (data) {
+                          translations[3].value = data.data.translation
+                        })
+                    }, 1100)
+                  })
+              }, 1100)
+            })
+        }, 1100)
+      })
+  }
+})
+  </script>
+</html>
