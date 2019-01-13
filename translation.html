@@ -13,10 +13,11 @@
   <body>
     <div id="main">
       <div id="header-block" class="block">
-        <h1>            Diē             <br>                Ludōrum        </h1>
+        <a id="header-link" href="index.html"><h1>Diē<br>Ludōrum</h1></a>
+        <p id="subtitle"><i>Sālve!</i></p>
       </div>
       <div id="title-block" class="block">
-        <h2>            Lost In Translationn            </h2>
+        <h2>Lost In Translation</h2>
       </div>
       <div id="page-content">
         <p>Enter some funny english text here: </p>
@@ -31,45 +32,51 @@
         <p>Finally, English: </p>
         <input type="text" class="translation" disabled>
       </div>
-      <div id="m1" class="block small-block"><a href="#">Roman Numerals</a></div>
+      <div id="m1" class="block small-block"><a href="romannumerals.html">Roman Numerals</a></div>
       <div id="m2" class="block small-block"><a href="#">Roman Numerals</a></div>
       <footer>Created by <a href="https://github.com/jman294">jman294</a>.<b>:wq</b> </footer>
     </div>
   </body>
   <script>
-    var button = document.getElementById("go-button")
-var input = document.getElementById("input-field")
-var translations = document.getElementsByClassName("translation")
-button.addEventListener("click", function (e) {
-  var english = input.value
-  if (english === '') {
-    button.textContent = 'Please enter something!'
-  } else {
-    var urlLa = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=la&text='
-    var urlEn = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=en&text='
-    axios.get(urlLa + english)
-      .then(function (data) {
-        translations[0].value = data.data.translation
-        setTimeout(function () {
-          axios.get(urlEn + data.data.translation)
-            .then(function (data) {
-              translations[1].value = data.data.translation
-              setTimeout(function () {
-                axios.get(urlLa + data.data.translation)
-                  .then(function (data) {
-                    translations[2].value = data.data.translation
-                    setTimeout(function () {
-                      axios.get(urlEn + data.data.translation)
-                        .then(function (data) {
-                          translations[3].value = data.data.translation
-                        })
-                    }, 1100)
-                  })
-              }, 1100)
-            })
-        }, 1100)
-      })
-  }
+    function htmlDecode(input){
+      var e = document.createElement('div');
+      e.innerHTML = input;
+      // handle case of empty input
+      return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+  var button = document.getElementById("go-button")
+  var input = document.getElementById("input-field")
+  var translations = document.getElementsByClassName("translation")
+  button.addEventListener("click", function (e) {
+    var english = input.value
+    if (english === '') {
+      button.textContent = 'Please enter something!'
+    } else {
+      var urlLa = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=la&text='
+      var urlEn = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=en&text='
+      axios.get(urlLa + english)
+        .then(function (data) {
+          translations[0].value = htmlDecode(data.data.translation)
+          setTimeout(function () {
+            axios.get(urlEn + htmlDecode(data.data.translation))
+              .then(function (data) {
+                translations[1].value = htmlDecode(data.data.translation)
+                setTimeout(function () {
+                  axios.get(urlLa + htmlDecode(data.data.translation))
+                    .then(function (data) {
+                      translations[2].value = htmlDecode(data.data.translation)
+                      setTimeout(function () {
+                        axios.get(urlEn + htmlDecode(data.data.translation))
+                          .then(function (data) {
+                            translations[3].value = htmlDecode(data.data.translation)
+                          })
+                      }, 1100)
+                    })
+                }, 1100)
+              })
+          }, 1100)
+        })
+    }
 })
   </script>
 </html>

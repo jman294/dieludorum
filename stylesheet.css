@@ -46,6 +46,16 @@ h3 {
 	color: white;
 }
 
+#header-link {
+  text-decoration: none;
+  color: white;
+}
+
+#subtitle {
+  position: inline-block;
+  text-align: right;
+}
+
 #title-block {
 	background-color: #FFFF66;
 	text-align: right;
@@ -58,9 +68,14 @@ h3 {
 	background-color: white;
 }
 
-.translation {
+#input-field, .translation {
   width: 100%;
   font-size: 20px;
+}
+
+button {
+  font-size: 20px;
+  margin-top: 5px;
 }
 
 footer {

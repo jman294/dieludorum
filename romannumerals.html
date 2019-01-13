@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Die Ludorum</title>
+    <meta name="author" content="name">
+    <meta name="description" content="description here">
+    <meta name="keywords" content="keywords,here">
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <div id="header-block" class="block">
+        <a id="header-link" href="index.html"><h1>Diē<br>Ludōrum</h1></a>
+        <p id="subtitle"><i>Sālve!</i></p>
+      </div>
+      <div id="title-block" class="block">
+        <h2>Roman Numeral Converter</h2>
+      </div>
+      <div id="page-content">
+        <p>Enter Roman numerals here: </p>
+        <input type="text" id="roman-field" class="translation">
+        <p>Enter regular numerals here: </p>
+        <input type="text" id="reg-field" class="translation">
+        <br>
+        <button id="go">Convert!</button>
+        <button id="clear">Clear both fields</button>
+      </div>
+      <div id="m1" class="block small-block"><a href="translation.html">Lost in Translation</a></div>
+      <footer>Created by <a href="https://github.com/jman294">jman294</a>.<b>:wq</b> </footer>
+    </div>
+    <script>
+      var romanField = document.getElementById("roman-field");
+var regularField = document.getElementById("reg-field");
+var button = document.getElementById("go");
+var clear = document.getElementById("clear");
+
+var romanMap = {
+  I: 1,
+  V: 5,
+  X: 10,
+  L: 50,
+  C: 100,
+  D: 500,
+  M: 1000,
+}
+
+function toRoman (intString) {
+  var num = parseInt(intString)
+  if (isNaN(num))
+    return "Bad numeral input";
+  var digits = String(+num).split(""),
+    key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+      "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+      "","I","II","III","IV","V","VI","VII","VIII","IX"],
+    roman = "",
+    i = 3;
+  while (i--)
+    roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+  return Array(+digits.join("") + 1).join("M") + roman;
+}
+
+function toRegular (romanString) {
+  romanString = romanString.toUpperCase()
+  var result = 0;
+  // the result is now a number, not a string
+  var decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  var roman = ["M", "CM","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"];
+  for (var i = 0;i<=decimal.length;i++) {
+    while (romanString.indexOf(roman[i]) === 0){
+      result += decimal[i];
+      romanString = romanString.replace(roman[i],'');
+    }
+  }
+  if (result === 0) {
+    return "Bad Roman input"
+  }
+  return result;
+}
+
+button.addEventListener("click", function () {
+  var romanNumerals = romanField.value
+  var regularNumerals = regularField.value
+
+  button.textContent = "Convert!";
+
+  if (romanNumerals === "" && regularNumerals === "") {
+    button.textContent = "Enter text in only one of the fields!";
+  } else if (romanNumerals === "" && regularNumerals !== "") {
+    romanField.value = toRoman(regularNumerals)
+    regularField.value = ""
+  } else if (romanNumerals !== "" && regularNumerals === "") {
+    regularField.value = toRegular(romanNumerals)
+    romanField.value = ""
+  } else {
+    button.textContent = "Enter text in only one of the fields!"
+  }
+})
+
+clear.addEventListener("click", function () {
+  regularField.value = ""
+  romanField.value = ""
+})
+    </script>
+  </body>
+</html>
