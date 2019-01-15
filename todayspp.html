@@ -17,21 +17,41 @@
         <p id="subtitle"><i>Sālve!</i></p>
       </div>
       <div id="title-block" class="block">
-        <h2>Welcome!</h2>
+        <h2>Verb of the Day!</h2>
       </div>
       <div id="page-content">
-        Welcome to Diē Ludōrum!
-
-        <p>
-        This is a fun website full of latin things! Check back soon for more stuff!
-
-        ~ Jack
-        </p>
+        <div id="loading">
+          <p id="loading-text">Your word should be here shortly...</p>
+          <img id="loading-img" src="loadingcircle.gif">
+        </div>
+        <div id="after-load" style="display: none">
+          <h3 id="pp"></h3>
+          <div id="definition">
+          </div>
+        </div>
       </div>
       <div id="m1" class="block small-block"><a href="translation.html">Lost in Translation</a></div>
       <div id="m2" class="block small-block"><a href="romannumerals.html">Roman Numerals</a></div>
-      <div id="m1" class="block small-block"><a href="todayspp.html">Verb of the Day!</a></div>
       <footer>Created by <a href="https://github.com/jman294">jman294</a>.<b>:wq</b> </footer>
     </div>
+  <script>
+    var loadingDiv = document.getElementById("loading")
+    var afterLoadContent = document.getElementById("after-load")
+    var ppHeading = document.getElementById("pp")
+    var definitionDiv = document.getElementById("definition")
+    
+    setTimeout(function () {
+      var url = "https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/dailylatin"
+      axios.get(url)
+        .then(function (data) {
+          ppHeading.textContent = data.data.pp
+          definitionDiv.innerHTML = data.data.defHtml
+          loadingDiv.style.display = "none"
+          afterLoadContent.style.display = "block"
+          console.log(data)
+        })
+    }, 550)
+
+  </script>
   </body>
 </html>

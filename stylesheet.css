@@ -1,49 +1,49 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body,
 html {
-	margin: 0;
+  margin: 0;
 }
 
 body {
-	background-color: #d1d7f4;
+  background-color: #d1d7f4;
 }
 
 #main {
-	background-color: white;
+  background-color: white;
 }
 
 .block {
-	display: absolute;
-	margin: none;
-	padding: 1%;
-	font-size: 20pt;
-	font-family: monospace;
-	width: 100%;
+  display: absolute;
+  margin: none;
+  padding: 1%;
+  font-size: 20pt;
+  font-family: monospace;
+  width: 100%;
 }
 
 .small-block {
-	font-size: 15px;
-	text-align: center;
+  font-size: 15px;
+  text-align: center;
 }
 
 #m1 {
-	background-color: ;
+  background-color: ;
 }
 
 h1,
 h2,
 h3 {
-	font-size: inherit;
+  font-size: inherit;
 }
 
 #header-block {
-	top: 0;
-	left: 0;
-	background-color: #86608E;
-	color: white;
+  top: 0;
+  left: 0;
+  background-color: #86608E;
+  color: white;
 }
 
 #header-link {
@@ -57,20 +57,24 @@ h3 {
 }
 
 #title-block {
-	background-color: #FFFF66;
-	text-align: right;
+  background-color: #FFFF66;
+  text-align: right;
 }
 
 #page-content {
-	margin: 5px;
-	padding: 10px;
-	font-size: 20px;
-	background-color: white;
+  margin: 5px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: white;
 }
 
 #input-field, .translation {
   width: 100%;
   font-size: 20px;
+}
+
+#loading-text {
+  display: inline;
 }
 
 button {
@@ -79,20 +83,20 @@ button {
 }
 
 footer {
-	padding: 1%;
-	width: 98%;
-	padding-top: 30 px;
-	text-align: center;
-	box-shadow: inset 0px 4px 5px -4px rgba(0, 0, 0, 0.75);
-	background-color: #fdfdfd;
+  padding: 1%;
+  width: 98%;
+  padding-top: 30 px;
+  text-align: center;
+  box-shadow: inset 0px 4px 5px -4px rgba(0, 0, 0, 0.75);
+  background-color: #fdfdfd;
 }
 
 @media only screen and (min-width: 650px) {
-	#main {
-		margin: auto;
-		margin-top: 50px;
-		width: 60%;
-		height: 90%;
-		border: 1px solid #000;
-	}
+  #main {
+    margin: auto;
+    margin-top: 50px;
+    width: 60%;
+    height: 90%;
+    border: 1px solid #000;
+  }
 }
