@@ -62,7 +62,7 @@ h3 {
 }
 
 #page-content {
-  margin: 5px;
+  /*margin: 5px 150px;*/
   padding: 10px;
   font-size: 20px;
   background-color: white;
@@ -98,5 +98,9 @@ footer {
     width: 60%;
     height: 90%;
     border: 1px solid #000;
+  }
+
+  #page-content {
+    margin: 5px 150px;
   }
 }

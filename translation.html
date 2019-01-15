@@ -23,6 +23,7 @@
         <p>Enter some funny english text here: </p>
         <input type="text" id="input-field">
         <button id="go-button">Go!</button>
+        <button id="random-button">Random!</button>
         <p>Latin Translation: </p>
         <input type="text" class="translation" disabled>
         <p>English Translation of the last Latin: </p>
@@ -33,51 +34,67 @@
         <input type="text" class="translation" disabled>
       </div>
       <div id="m1" class="block small-block"><a href="romannumerals.html">Roman Numerals</a></div>
-      <div id="m2" class="block small-block"><a href="#">Roman Numerals</a></div>
       <div id="m1" class="block small-block"><a href="todayspp.html">Verb of the Day!</a></div>
       <footer>Created by <a href="https://github.com/jman294">jman294</a>.<b>:wq</b> </footer>
     </div>
   </body>
   <script>
-    function htmlDecode(input){
-      var e = document.createElement('div');
-      e.innerHTML = input;
-      // handle case of empty input
-      return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-    }
-  var button = document.getElementById("go-button")
-  var input = document.getElementById("input-field")
-  var translations = document.getElementsByClassName("translation")
-  button.addEventListener("click", function (e) {
-    var english = input.value
-    if (english === '') {
-      button.textContent = 'Please enter something!'
-    } else {
-      var urlLa = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=la&text='
-      var urlEn = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=en&text='
-      axios.get(urlLa + english)
-        .then(function (data) {
-          translations[0].value = htmlDecode(data.data.translation)
-          setTimeout(function () {
-            axios.get(urlEn + htmlDecode(data.data.translation))
-              .then(function (data) {
-                translations[1].value = htmlDecode(data.data.translation)
-                setTimeout(function () {
-                  axios.get(urlLa + htmlDecode(data.data.translation))
-                    .then(function (data) {
-                      translations[2].value = htmlDecode(data.data.translation)
-                      setTimeout(function () {
-                        axios.get(urlEn + htmlDecode(data.data.translation))
-                          .then(function (data) {
-                            translations[3].value = htmlDecode(data.data.translation)
-                          })
-                      }, 1100)
-                    })
-                }, 1100)
-              })
-          }, 1100)
-        })
-    }
+    var funnyOnes = [
+      "Thou shall not enter!",
+      "I am a cookie. You are a cookie. We are all cookies.",
+      "It has begun.",
+      "Make up your own for pete's sake!",
+    ]
+
+function htmlDecode(input){
+  var e = document.createElement('div');
+  e.innerHTML = input;
+  // handle case of empty input
+  return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+}
+var button = document.getElementById("go-button")
+var random = document.getElementById("random-button")
+var input = document.getElementById("input-field")
+var translations = document.getElementsByClassName("translation")
+
+button.addEventListener("click", function (e) {
+  go(input.value)
 })
+random.addEventListener("click", function (e) {
+  var text = funnyOnes[Math.floor(Math.random() * Math.floor(funnyOnes.length))];
+  input.value = text
+  go(text)
+})
+
+function go (english) {
+  if (english === '') {
+    button.textContent = 'Please enter something!'
+  } else {
+    var urlLa = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=la&text='
+    var urlEn = 'https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/googletranslate?langTo=en&text='
+    axios.get(urlLa + english)
+      .then(function (data) {
+        translations[0].value = htmlDecode(data.data.translation)
+        setTimeout(function () {
+          axios.get(urlEn + htmlDecode(data.data.translation))
+            .then(function (data) {
+              translations[1].value = htmlDecode(data.data.translation)
+              setTimeout(function () {
+                axios.get(urlLa + htmlDecode(data.data.translation))
+                  .then(function (data) {
+                    translations[2].value = htmlDecode(data.data.translation)
+                    setTimeout(function () {
+                      axios.get(urlEn + htmlDecode(data.data.translation))
+                        .then(function (data) {
+                          translations[3].value = htmlDecode(data.data.translation)
+                        })
+                    }, 1100)
+                  })
+              }, 1100)
+            })
+        }, 1100)
+      })
+  }
+}
   </script>
 </html>
