@@ -83,8 +83,9 @@ button {
 }
 
 footer {
+  margin-top: 20px;
   padding: 1%;
-  width: 98%;
+  width: 100%;
   padding-top: 30 px;
   text-align: center;
   box-shadow: inset 0px 4px 5px -4px rgba(0, 0, 0, 0.75);
@@ -95,6 +96,7 @@ footer {
   #main {
     margin: auto;
     margin-top: 50px;
+    margin-bottom: 50px;
     width: 60%;
     height: 90%;
     border: 1px solid #000;

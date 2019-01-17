@@ -28,30 +28,35 @@
           <h3 id="pp"></h3>
           <div id="definition">
           </div>
+          <h3>To Remember: </h3>
+          <p id="memorization">
+          </p>
         </div>
       </div>
       <div id="m1" class="block small-block"><a href="translation.html">Lost in Translation</a></div>
       <div id="m2" class="block small-block"><a href="romannumerals.html">Roman Numerals</a></div>
       <footer>Created by <a href="https://github.com/jman294">jman294</a>.<b>:wq</b> </footer>
     </div>
-  <script>
-    var loadingDiv = document.getElementById("loading")
-    var afterLoadContent = document.getElementById("after-load")
-    var ppHeading = document.getElementById("pp")
-    var definitionDiv = document.getElementById("definition")
-    
-    setTimeout(function () {
-      var url = "https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/dailylatin"
-      axios.get(url)
-        .then(function (data) {
-          ppHeading.textContent = data.data.pp
-          definitionDiv.innerHTML = data.data.defHtml
-          loadingDiv.style.display = "none"
-          afterLoadContent.style.display = "block"
-          console.log(data)
-        })
-    }, 550)
+    <script>
+      var loadingDiv = document.getElementById("loading")
+var afterLoadContent = document.getElementById("after-load")
+var ppHeading = document.getElementById("pp")
+var definitionDiv = document.getElementById("definition")
+var memorization = document.getElementById("memorization")
 
-  </script>
+setTimeout(function () {
+  var url = "https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/dailylatin"
+  axios.get(url)
+    .then(function (data) {
+      ppHeading.textContent = data.data.pp
+      definitionDiv.innerHTML = data.data.defHtml
+      loadingDiv.style.display = "none"
+      memorization.textContent = data.data.memorization
+      afterLoadContent.style.display = "block"
+      console.log(data)
+    })
+}, 550)
+
+    </script>
   </body>
 </html>
