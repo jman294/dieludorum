@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Die Ludorum</title>
+    <meta name="author" content="name">
+    <meta name="description" content="description here">
+    <meta name="keywords" content="keywords,here">
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <div id="header-block" class="block">
+        <a id="header-link" href="index.html"><h1>Diē<br>Ludōrum</h1></a>
+        <p id="subtitle"><i>Sālve!</i></p>
+      </div>
+      <div id="title-block" class="block">
+        <h2>State Mottos</h2>
+      </div>
+      <div id="page-content">
+        <b>Alabama</b> ~ Audemus Jura Nostra Defendere <i>(We Dare Maintain Our Rights)</i><br>
+        <b>Arizona</b> ~ Ditat Deus <i>(God enriches)</i><br>
+        <b>Arkansas</b> ~ Regnat Populus <i>(The people rule)</i><br>
+        <b>Colorado</b> ~ Nil Sine Numine <i>(Nothing without providence)</i><br>
+        <b>Connecticut</b> ~ Qui Transtulit Sustinet <i>(He who transplanted still sustains)</i><br>
+        <b>Idaho</b> ~ Esto Perpetua <i>(It is perpetual)</i><br>
+        <b>Kansas</b> ~ Ad Astra per Aspera <i>(To the stars through difficulties)</i><br>
+        <b>Kentucky</b> ~ Deo gratiam habeamus <i>(Let Us Be Grateful to God)</i><br>
+        <b>Maine</b> ~ Dirigo <i>(I direct)</i><br>
+        <b>Massachusetts</b> ~ Ense Petit Placidam Sub Libertate Quietem <i>(By the sword we seek peace, but peace only under liberty)</i><br>
+        <b>Michigan</b> ~ Si Quaeris Peninsulam Amoenam Circumspice <i>(If you seek a pleasant peninsula, look about you)</i><br>
+        <b>Mississippi</b> ~ Virtute et Armis <i>(By valor and arms)</i><br>
+        <b>Missouri</b> ~ Salus Populi Suprema Lex Esto <i>(The welfare of the people shall be the supreme law)</i><br>
+        <b>New Mexico</b> ~ Crescit Eundo <i>(It grows as it goes)</i><br>
+        <b>New York</b> ~ Excelsior <i>(Higher)</i><br>
+        <b>North Carolina</b> ~ Esse Quam Videri <i>(To be, rather than to seem)</i><br>
+        <b>Oklahoma</b> ~ Labor Omnia Vincit <i>(Labor conquers all things)</i><br>
+        <b>Oregon</b> ~ Alis Volat Propriis <i>(She flies with her own wings)</i><br>
+        <b>South Carolina</b> ~ Animis Opibusque Parati <i>(Prepared in mind and resources)</i><br>
+        <b>South Carolina</b> ~ Dum Spiro Spero <i>(While I breathe, I hope)</i><br>
+        <b>Vermont</b> ~ Stella quarta decima fulgea <i>(May the 14th star shine bright)</i><br>
+        <b>Virginia</b> ~ Sic Semper Tyrannis <i>(Thus always to tyrants)</i><br>
+        <b>West Virginia</b> ~ Montani Semper Liberi <i>(Mountaineers always free)</i><br>
+      <div id="m1" class="block small-block"><a href="translation.html">Lost in Translation</a></div>
+      <div id="m2" class="block small-block"><a href="romannumerals.html">Roman Numerals</a></div>
+      <div id="m1" class="block small-block"><a href="todayspp.html">Verb of the Day!</a></div>
+      <footer>Created by <a href="https://github.com/jman294">jman294</a>.<b>:wq</b> </footer>
+    </div>
+    <script>
+      var loadingDiv = document.getElementById("loading")
+var afterLoadContent = document.getElementById("after-load")
+var ppHeading = document.getElementById("pp")
+var definitionDiv = document.getElementById("definition")
+var memorization = document.getElementById("memorization")
+
+setTimeout(function () {
+  var url = "https://wt-a25dcd0be84e112110afd7c58f545428-0.sandbox.auth0-extend.com/dailylatin"
+  axios.get(url)
+    .then(function (data) {
+      ppHeading.textContent = data.data.pp
+      definitionDiv.innerHTML = data.data.defHtml
+      loadingDiv.style.display = "none"
+      memorization.textContent = data.data.memorization
+      afterLoadContent.style.display = "block"
+      console.log(data)
+    })
+}, 550)
+
+    </script>
+  </body>
+</html>
